@@ -29,12 +29,13 @@ services:
     restart: always
     image: mongo:4.2.0
     volumes:
-      - ./data:/data/db
+      - mongodata:/data/db
     networks:
       - express-mongo
     expose:
       - 27017
-
+volumes:
+  mongodata:
 networks:
   react-express:
   express-mongo:
