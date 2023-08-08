@@ -17,10 +17,12 @@ pipeline {
             }
         }
         stage('Build') { 
-            steps {         
+            steps {    
+                sh 'cd src'     
+                sh 'cd frontend'
                 script {
                     //dockerImage = docker.build registry + ":frontend-$BUILD_NUMBER"
-                    app = docker.build("frontend:$BUILD_NUMBER", "-f src/frontend/Dockerfile .")
+                    app = docker.build("frontend:$BUILD_NUMBER")
                 }
             }
         }
