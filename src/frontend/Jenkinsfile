@@ -26,13 +26,13 @@ pipeline {
             }
         }
         stage('Deploy image') {
-            steps {
+      
                  //sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
                       sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
                         sh "docker push ${registry}:${frontendTag}"
                 }
-            }
+            
         }
     }
 }
