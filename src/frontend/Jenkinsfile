@@ -31,6 +31,7 @@ pipeline {
         }
         stage('Deploy image') {
         steps{
+            sh "docker tag frontend:$BUILD_NUMBER ${registry}:frontend:$BUILD_NUMBER"
             script{
                 docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
                     dockerImage.push("frontend:$BUILD_NUMBER")
