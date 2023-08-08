@@ -16,11 +16,11 @@ pipeline {
                 }
             }
         }
-
         stage('Build') { 
-            steps { 
+            steps {         
                 script {
-                    dockerImage = docker.build registry + ":frontend-$BUILD_NUMBER"
+                    //dockerImage = docker.build registry + ":frontend-$BUILD_NUMBER"
+                    app = docker.build("frontend")
                 }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
         steps{
             script{
                 docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                    dockerImage.push()
+                    dockerImage.push("frontend-$BUILD_NUMBER")
                 }
             }
         }
