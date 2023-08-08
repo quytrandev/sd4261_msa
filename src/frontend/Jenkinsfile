@@ -4,7 +4,7 @@ pipeline {
     registryCredential = 'aws-credentials'
     dockerImage = 'frontend'
     frontendTag = "frontend-$BUILD_NUMBER"
-  }
+    }
     agent any
     options {
         skipStagesAfterUnstable()
@@ -31,15 +31,15 @@ pipeline {
             }
         }
         stage('Deploy image') {
-        steps{
-            sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
-            script{
-                docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                    dockerImage.push(frontendTag)
+            steps {
+                sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
+                script{
+                    docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
+                    docker.image(frontendTag).push()
                     //dockerImage.push()
+                    }
                 }
             }
         }
-    }
     }
 }
