@@ -25,17 +25,12 @@ pipeline {
                 }
             }
         }
-        stage('Test'){
-            steps {
-                 echo 'Empty'
-            }
-        }
         stage('Deploy image') {
             steps {
-                //sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
+                 //sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
                 script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                     app.push("${frontendTag}")
+                     app.push()
                     }
                 }
             }
