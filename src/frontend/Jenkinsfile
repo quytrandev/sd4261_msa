@@ -35,7 +35,7 @@ pipeline {
                 //sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
                 script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                     app.push("qt-practical-devops-ecr:"+frontendTag)
+                     app.push("qt-practical-devops-ecr:${frontendTag}")
                     }
                 }
             }
