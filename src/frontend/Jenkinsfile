@@ -3,6 +3,7 @@ pipeline {
     registry = '430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr'
     registryCredential = 'aws-credentials'
     dockerImage = 'frontend'
+    frontendTag = "frontend-$BUILD_NUMBER"
   }
     agent any
     options {
@@ -20,7 +21,7 @@ pipeline {
             steps {         
                 script {
                     //dockerImage = docker.build registry + ":frontend-$BUILD_NUMBER"
-                    app = docker.build("frontend:$BUILD_NUMBER", "-f src/frontend/Dockerfile .")
+                    app = docker.build(frontendTag, "-f src/frontend/Dockerfile .")
                 }
             }
         }
@@ -31,11 +32,11 @@ pipeline {
         }
         stage('Deploy image') {
         steps{
-            sh "docker tag frontend:$BUILD_NUMBER ${registry}:frontend:$BUILD_NUMBER"
+            sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
             script{
                 docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                    dockerImage.push("frontend:$BUILD_NUMBER")
-                    dockerImage.push()
+                    dockerImage.push(frontendTag)
+                    //dockerImage.push()
                 }
             }
         }
