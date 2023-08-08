@@ -30,11 +30,11 @@ pipeline {
                  //sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
                 script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                    
+                    sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
+                        sh "docker push ${registry}:${frontendTag}"
                     }
                 }
-                sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
-                        sh "docker push ${registry}:${frontendTag}"
+                
             }
         }
     }
