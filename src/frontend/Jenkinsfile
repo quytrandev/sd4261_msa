@@ -28,10 +28,9 @@ pipeline {
         stage('Deploy image') {
             steps {
                  //sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
-                script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                     docker.image("qt-practical-devops-ecr").push(frontendTag)
-                    }
+                      sh "docker tag ${frontendTag} ${registry}:${frontendTag}"
+                        sh "docker push ${registry}:${frontendTag}"
                 }
             }
         }
