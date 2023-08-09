@@ -1,0 +1,39 @@
+pipeline {
+    environment {
+    registry = '430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr'
+    registryCredential = 'aws-credentials'
+    dockerImage = "backend-$BUILD_NUMBER"
+    
+    }
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+         stage('Clone repository') { 
+            steps { 
+                script{
+                checkout scm
+                }
+            }
+        }
+        stage('Build') { 
+            steps {         
+                script {
+                    app = docker.build(dockerImage, "-f src/backend/Dockerfile .")
+                }
+            }
+        }
+        stage('Deploy image') {
+            steps {
+                script{
+                    docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
+                        sh "docker tag ${dockerImage} ${registry}:${dockerImage}"
+                        sh "docker push ${registry}:${dockerImage}"
+                    }
+                }
+                
+            }
+        }
+    }
+}
