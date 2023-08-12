@@ -20,6 +20,7 @@
     "lodash": "^4.17.13",
     "mongodb": "^3.0.7",
     "mongoose": "^6.0.9",
+    "prom-client": "^14.2.0",
     "simple-node-logger": "^18.12.23",
     "validator": "^13.7.0"
   },
