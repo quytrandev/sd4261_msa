@@ -10,6 +10,7 @@ export default class App extends React.Component {
 
     this.state = {
       todos: [],
+      metrics: []
     };
   }
 
@@ -35,16 +36,42 @@ export default class App extends React.Component {
       .catch((e) => console.log("Error : ", e));
   };
 
+  handleGetMetrics = () => {
+    axios
+      .get("/api/metrics")
+      .then((response) => {
+        this.setState({
+          metrics: response.data
+        });
+      })
+      .catch((e) => console.log("Error : ", e));
+  };
+
   render() {
     return (
       <div className="App container">
         <div className="container-fluid">
           <div className="row">
             <div className="col-xs-12 col-sm-8 col-md-8 offset-md-2">
-              <h1>Todos v2.0</h1>
+              <h1>Todos v1.3</h1>
               <div className="todo-app">
                 <AddTodo handleAddTodo={this.handleAddTodo} />
                 <TodoList todos={this.state.todos} />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-sm-8 col-md-8 offset-md-2">
+              <h1>Todos Metrics</h1>
+              <div className="todo-app">
+                <button 
+                  className="btn btn-primary" 
+                  onClick={this.handleGetMetrics}>
+                    Get Metrics
+                </button>
+              </div>
+              <div className="row">
+                {this.state.metrics}
               </div>
             </div>
           </div>
