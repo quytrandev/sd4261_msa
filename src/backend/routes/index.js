@@ -12,7 +12,6 @@ const routes = (app) => {
     help: 'sample custom metrics to track number of post request hit',
   });
   collectDefaultMetrics({
-    //labels: { NODE_APP_INSTANCE: process.env.NODE_APP_INSTANCE },
     labels: { NODE_APP_INSTANCE: 'backend' },
   });
 
@@ -57,3 +56,4 @@ const routes = (app) => {
   app.use("/api", router);
 };
 module.exports = routes;
+//Prometheus custom metrics referenced to this repo by anh Toan Le Hang: https://github.com/ToanLeH/sd2079_msa
