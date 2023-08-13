@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr:frontend-4
+          image: 430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr:frontend-5
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
