@@ -7,7 +7,7 @@ COPY /src/backend/package.json /usr/src/app/package.json
 COPY /src/backend/package-lock.json /usr/src/app/package-lock.json
 RUN npm ci
 
-COPY . /usr/src/app
+COPY /src/backend /usr/src/app
 
 EXPOSE 3000
 
