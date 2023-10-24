@@ -47,6 +47,16 @@ export default class App extends React.Component {
       .catch((e) => console.log("Error : ", e));
   };
 
+  handleGetEnv= () => {
+    axios
+      .get("/api/environment")
+      .then((response) => {
+        this.setState({
+          env: response.data
+        });
+      })
+      .catch((e) => console.log("Error : ", e));
+  };
   render() {
     return (
       <div className="App container">
@@ -72,6 +82,21 @@ export default class App extends React.Component {
               </div>
               <div className="row">
                 {this.state.metrics}
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-sm-8 col-md-8 offset-md-2">
+              <h1>Get App Env</h1>
+              <div className="todo-app">
+                <button 
+                  className="btn btn-primary" 
+                  onClick={this.handleGetEnv}>
+                    Get Metrics
+                </button>
+              </div>
+              <div className="row">
+                {this.state.env}
               </div>
             </div>
           </div>

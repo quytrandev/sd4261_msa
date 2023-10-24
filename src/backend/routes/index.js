@@ -51,6 +51,14 @@ const routes = (app) => {
         res.end(data);
       })
   });
+
+ 
+  router.get("/environment", (req, res) => {
+    console.log("Hello world")
+    console.log(process.env)
+    res.send(process.env.CURRENT_ENV)
+  });
+  
   //it's a prefix before api it is useful when you have many modules and you want to
   //differentiate b/w each module you can use this technique
   app.use("/api", router);
