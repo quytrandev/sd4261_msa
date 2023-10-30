@@ -35,7 +35,6 @@ pipeline {
                 script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
                         sh "docker tag ${dockerImage} ${registry}:${dockerImage}"
-                        sh "docker tag ${dockerImage} ${registry}:${dockerImage}"
                         sh "docker push ${registry}:${dockerImage}"
                     }
                 }
