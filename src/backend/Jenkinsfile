@@ -1,8 +1,8 @@
 pipeline {
     environment {
-    registry = '430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr'
+    registry = '430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr-backend'
     registryCredential = 'aws-credentials'
-    dockerImage = "backend-$BUILD_NUMBER"
+    dockerImage = "$BUILD_NUMBER"
     
     }
     agent any
