@@ -2,8 +2,9 @@ pipeline {
     environment {
     registry = '430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr-backend'
     registryCredential = 'aws-credentials'
-    dockerImage = "$BUILD_NUMBER"
-    
+    tag = "$BUILD_NUMBER"
+    dockerImage = "backend-${tag}"
+
     }
     agent any
     options {
@@ -28,8 +29,8 @@ pipeline {
             steps {
                 script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                        sh "docker tag ${dockerImage} ${registry}:${dockerImage}"
-                        sh "docker push ${registry}:${dockerImage}"
+                        sh "docker tag ${dockerImage} ${registry}:${tag}"
+                        sh "docker push ${registry}:${tag}"
                     }
                 }
                 

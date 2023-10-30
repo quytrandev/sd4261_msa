@@ -2,9 +2,10 @@ pipeline {
     environment {
     registry = '430963847993.dkr.ecr.us-west-2.amazonaws.com/qt-practical-devops-ecr-frontend'
     registryCredential = 'aws-credentials'
-    dockerImage = "$BUILD_NUMBER"
-    
+    tag = "$BUILD_NUMBER"
+    dockerImage = "frontend-${tag}"
     }
+
     agent any
     options {
         skipStagesAfterUnstable()
@@ -34,8 +35,8 @@ pipeline {
             steps {
                 script{
                     docker.withRegistry("https://" + registry, "ecr:us-west-2:" + registryCredential) {
-                        sh "docker tag ${dockerImage} ${registry}:${dockerImage}"
-                        sh "docker push ${registry}:${dockerImage}"
+                        sh "docker tag ${dockerImage} ${registry}:${tag}"
+                        sh "docker push ${registry}:${tag}"
                     }
                 }
                 
