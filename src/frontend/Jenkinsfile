@@ -25,12 +25,7 @@ pipeline {
                 }
             }
         }
-        stage('Trivy Scan')
-        {
-            steps {
-                sh "trivy ${dockerImage}:latest"
-            }
-        }
+        
         stage('Deploy image') {
             steps {
                 script{
@@ -40,6 +35,13 @@ pipeline {
                     }
                 }
                 
+            }
+        }
+        stage('Trivy Scan')
+        {
+            steps {
+                sh "trivy filesystem --ignore-unfixed --vuln-type os,library $WORKSPACE"
+                sh "sudo trivy image --ignore-unfixed --vuln-type library,os ${registry}:${tag}"
             }
         }
     }
