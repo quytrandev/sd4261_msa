@@ -28,7 +28,7 @@ pipeline {
         stage('Trivy Scan')
         {
             steps {
-                sh "trivy ${dockerImage}"
+                sh "trivy ${dockerImage}:latest"
             }
         }
         stage('Deploy image') {
