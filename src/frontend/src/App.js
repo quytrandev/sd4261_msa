@@ -63,7 +63,7 @@ export default class App extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-xs-12 col-sm-8 col-md-8 offset-md-2">
-              <h1 style={{color: "green"}}>Todos ArgoCD v2.0 - Version 2</h1>
+              <h1 style={{color: "green"}}>Todos ArgoCD v2.0 - Version 3 Trigger CI/Image Updater</h1>
               <div className="todo-app">
                 <AddTodo handleAddTodo={this.handleAddTodo} />
                 <TodoList todos={this.state.todos} />
