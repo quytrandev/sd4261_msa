@@ -1,1 +1,2 @@
-Demo video: https://youtu.be/Mfno6FDs-eY
+- Practical DevOps Program: https://youtu.be/Mfno6FDs-eY
+- π-shaped Program - Practical DevOps Solution Design: https://youtu.be/jn9CCdh3OdQ
